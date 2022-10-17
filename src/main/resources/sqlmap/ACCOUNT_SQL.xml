@@ -7,4 +7,32 @@
 	    	VALUES (#{nickname}, #{password})
 	    ]]>
 	</insert>
+	
+	<select id="select_detail" parameterType="map" resultType="map">
+    	<![CDATA[
+    		SELECT NICKNAME FROM ACCOUNT WHERE ACCOUNT_ID = ${accountId}
+    	]]>
+	</select>
+	
+	<update id="update" parameterType="map">  
+		<![CDATA[  
+			UPDATE ACCOUNT SET NICKNAME = #{nickname} WHERE ACCOUNT_ID = ${accountId}
+		]]>  
+	</update>  
+	
+	<delete id="delete" parameterType="map">  
+		<![CDATA[  
+			DELETE FROM ACCOUNT WHERE ACCOUNT_ID = ${accountId}
+		]]>  
+	</delete>
+	
+	<select id="select_list" parameterType="map" resultType="map">  
+		<![CDATA[
+			SELECT NICKNAME, TO_CHAR(INSERT_DATE, 'MM-DD') AS INSERT_DATE FROM ACCOUNT
+		]]>  
+		<if test="keyword != null and keyword != ''">  
+			WHERE NICKNAME LIKE CONCAT('%',#{keyword},'%')
+		</if>  
+		ORDER BY INSERT_DATE DESC  
+	</select>    
 </mapper>
