@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE  mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="api">
+	<insert id="insertApiData" parameterType="map" useGeneratedKeys="true" keyProperty="rowNum">  
+    	INSERT INTO ANIMALHOSPITAL (
+    		opnSfTeamCode
+    		, mgtNo
+    		, opnSvcId
+    		, updateDt
+    		, bplcNm
+    		, siteWhlAddr
+    		, rdnWhlAddr
+    		<if test="apvPermYmd != null and apvPermYmd !=''.toString()">
+	    		, apvPermYmd
+	    	</if>
+	    	<if test="apvCancelYmd != null and apvCancelYmd !=''.toString()">
+    			, apvCancelYmd
+    		</if>
+    		<if test="dcbYmd != null and dcbYmd !=''.toString()">
+	    		, dcbYmd
+    		</if>
+    		<if test="clgStdt != null and clgStdt !=''.toString()">
+    			, clgStdt
+    		</if>
+    		<if test="clgEnddt != null and clgEnddt !=''.toString()">
+	    		, clgEnddt
+	    	</if>
+	    	<if test="ropnYmd != null and ropnYmd !=''.toString()">
+    			, ropnYmd
+    		</if>
+    		, trdStateGbn
+    		, trdStateNm
+    		, dtlStateGbn
+    		, dtlStateNm
+    		<if test="siteTel != null and siteTel !=''.toString()">
+    			, siteTel
+    		</if>
+    	) VALUES (
+    		${opnSfTeamCode}
+    		, ${mgtNo}
+    		, #{opnSvcId}
+    		, TO_TIMESTAMP(#{updateDt},'YYYY-MM-DD HH24:mi:ss')
+    		, #{bplcNm}
+    		, #{siteWhlAddr}
+    		, #{rdnWhlAddr}
+    		<if test="apvPermYmd != null and apvPermYmd !=''.toString()">
+				,${apvPermYmd}
+			</if>
+			<if test="apvCancelYmd != null and apvCancelYmd !=''.toString()">
+				,${apvCancelYmd}
+			</if>
+			<if test="dcbYmd != null and dcbYmd !=''.toString()">
+				,${dcbYmd}
+			</if>
+			<if test="clgStdt != null and clgStdt !=''.toString()">
+				,${clgStdt}
+			</if>
+			<if test="clgEnddt != null and clgEnddt !=''.toString()">
+				,${clgEnddt}
+			</if>
+			<if test="ropnYmd != null and ropnYmd !=''.toString()">
+				,${ropnYmd}
+			</if>
+    		, ${trdStateGbn}
+    		, #{trdStateNm}
+    		, ${dtlStateGbn}
+    		, #{dtlStateNm}
+    		<if test="siteTel != null and siteTel !=''.toString()">
+    			, #{siteTel}
+    		</if>
+    	)
+    	ON CONFLICT ( opnSfTeamCode, mgtNo , opnSvcId )
+    	DO UPDATE SET 
+    		opnSfTeamCode=${opnSfTeamCode} 
+    		, mgtNo=${mgtNo}
+    		, opnSvcId=#{opnSvcId}
+    		, updateDt=TO_TIMESTAMP(#{updateDt},'YYYY-MM-DD HH24:mi:ss')
+    		, bplcNm=#{bplcNm}
+    		, siteWhlAddr=#{siteWhlAddr}
+    		, rdnWhlAddr=#{rdnWhlAddr}
+    		<if test="apvPermYmd != null and apvPermYmd !=''.toString()">
+	    		, apvPermYmd=${apvPermYmd}
+	    	</if>
+	    	<if test="apvCancelYmd != null and apvCancelYmd !=''.toString()">
+    			, apvCancelYmd=${apvCancelYmd}
+    		</if>
+    		<if test="dcbYmd != null and dcbYmd !=''.toString()">
+	    		, dcbYmd=${dcbYmd}
+    		</if>
+    		<if test="clgStdt != null and clgStdt !=''.toString()">
+    			, clgStdt=${clgStdt}
+    		</if>
+    		<if test="clgEnddt != null and clgEnddt !=''.toString()">
+	    		, clgEnddt=${clgEnddt}
+	    	</if>
+	    	<if test="ropnYmd != null and ropnYmd !=''.toString()">
+    			, ropnYmd=${ropnYmd}
+    		</if>
+    		, trdStateGbn=${trdStateGbn}
+    		, trdStateNm=#{trdStateNm}
+    		, dtlStateGbn=${dtlStateGbn}
+    		, dtlStateNm=#{dtlStateNm}
+    		<if test="siteTel != null and siteTel !=''.toString()">
+    			, siteTel=#{siteTel}
+    		</if>
+	</insert>
+	
+	<!-- 
+		create table animalHospital (
+				rowNum serial,
+				opnSfTeamCode integer,
+				mgtNo bigint,
+				opnSvcId varchar, 
+				updateDt timestamp,
+				bplcNm varchar,
+				siteWhlAddr varchar,
+				rdnWhlAddr varchar,
+				apvPermYmd integer,
+				apvCancelYmd integer,
+				dcbYmd integer,
+				clgStdt integer,
+				clgEnddt integer,
+				ropnYmd integer,
+				trdStateGbn integer,
+				trdStateNm varchar,
+				dtlStateGbn integer,
+				dtlStateNm varchar,
+				siteTel varchar,
+				primary key (opnSfTeamCode, mgtNo, opnSvcId)
+			)
+	 -->
+</mapper>
